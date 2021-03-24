@@ -70,3 +70,26 @@ RUN source /opt/intel/oneapi/setvars.sh && \
 export PYTHONPATH=$PYTHONPATH:/nrn/build/install/lib/python:/nrn/build/install/lib64/python && \
 cd ringtest && \
 mpirun -n 2 ./x86_64/special -mpi -python ringtest.py
+
+# Clone netpyne
+RUN git clone https://github.com/iomaganaris/netpyne.git && \
+cd netpyne && \
+git checkout magkanar/coreneuron_rebase
+
+# install netpyne requirements
+RUN cd netpyne && \
+pip3 install -e .
+
+# Copy M1 from host
+ADD M1.tar.gz /
+
+# Build special for M1
+RUN source /opt/intel/oneapi/setvars.sh && \
+cd M1/sim && \
+/nrn/build/install/bin/nrnivmodl -coreneuron ../mod
+
+# Run simulation
+RUN source /opt/intel/oneapi/setvars.sh && \
+export PYTHONPATH=/netpyne:/nrn/build/install/lib/python:/nrn/build/install/lib64/python:$PYTHONPATH && \
+cd M1/sim && \
+mpirun -n 8 ./x86_64/special -mpi -python init.py
