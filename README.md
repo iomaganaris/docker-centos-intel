@@ -7,7 +7,7 @@ Before building the image make sure to copy M1 repo in the same folder as the do
 ```
 git clone https://github.com/iomaganaris/M1.git
 cd M1
-git checkout magkanar/coreneuron_mod2c
+git checkout coreneuron_hoc
 cd ..
 tar -czvf M1.tar.gz M1
 docker build -t intel_centos8:2.0 .
