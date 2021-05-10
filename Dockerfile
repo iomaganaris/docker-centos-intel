@@ -34,13 +34,7 @@ mpicc --version
 RUN yum install -y wget git ncurses-devel python3-devel which
 
 # Install cmake
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz && \
-tar -zxvf cmake-3.17.3.tar.gz && \
-cd cmake-3.17.3 && \
-yum install -y openssl-devel && \
-./bootstrap --prefix=/usr/local && \
-make -j8 && \
-make install
+RUN pip3 install cmake
 
 # Clone NEURON
 RUN git clone https://github.com/neuronsimulator/nrn.git
