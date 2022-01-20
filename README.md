@@ -5,9 +5,9 @@ Dockerfile that installs INTEL compilers and NEURON using CentOS 8
 Before building the image make sure to copy M1 repo in the same folder as the docker file
 
 ```
-git clone https://github.com/iomaganaris/M1.git
+git clone git@github.com:iomaganaris/M1.git
 cd M1
-git checkout coreneuron_hoc
+git checkout magkanar/M1_vip_ngf
 cd ..
 tar -czvf M1.tar.gz M1
 docker build -t intel_centos8:2.0 .
